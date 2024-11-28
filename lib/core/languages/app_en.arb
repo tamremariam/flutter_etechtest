@@ -49,7 +49,7 @@
   "scan": "Scan",
   "notification": "Notification",
   "profile": "Profile",
-  "foodDuration": "Food • {duration}> mins"
+  "foodDuration": "Food • {duration} mins"
 
 
 }
