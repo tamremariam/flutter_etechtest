@@ -44,7 +44,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/placeholder/
+
 flutter_icons:
   android: true
   ios: true
