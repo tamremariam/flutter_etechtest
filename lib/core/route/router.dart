@@ -1,8 +1,8 @@
-import 'package:etechtest/features/authentication/presentation/pages/login_page.dart';
-import 'package:etechtest/features/authentication/presentation/pages/password_recovery_page.dart';
-import 'package:etechtest/features/authentication/presentation/pages/reset_password_page.dart';
-import 'package:etechtest/features/authentication/presentation/pages/signup_page.dart';
-import 'package:etechtest/features/authentication/presentation/pages/verification_code_page.dart';
+import 'package:etechtest/features/authentication/presentation/pages/login/login_page.dart';
+import 'package:etechtest/features/authentication/presentation/pages/forgot/password_recovery_page.dart';
+import 'package:etechtest/features/authentication/presentation/pages/forgot/reset_password_page.dart';
+import 'package:etechtest/features/authentication/presentation/pages/signup/signup_page.dart';
+import 'package:etechtest/features/authentication/presentation/pages/forgot/verification_code_page.dart';
 import 'package:etechtest/features/home/presentation/landing_page.dart';
 import 'package:etechtest/features/home/presentation/search/searchscreen_page.dart';
 import 'package:etechtest/features/onboarding/onboarding_page.dart';
@@ -16,7 +16,7 @@ class AppRouter {
       builder: (BuildContext context, GoRouterState state) {
         return
             // DistancePriferencePage();
-            const SearchscreenPage();
+            const LoginPage();
         // const SplashScreen();
       },
       routes: <RouteBase>[

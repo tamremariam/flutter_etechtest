@@ -12,22 +12,12 @@ class AuthenticationRepositoryImplementation
   @override
   Future<DataState<String>> login(String username, String password) async {
     try {
-      // Create login data
       final loginData = AuthSendData(username: username, password: password);
 
       // Send login request
       final response = await apiAuthentcation.login(loginData);
 
-      // Parse the response
-      final loginResponse = loginresponceFromJson(response.token!);
-
-      // Check if the token is null and handle it
-      if (loginResponse.token != null) {
-        return DataState.success(loginResponse.token!);
-      }
-
-      //there must be additional error handling
-      return DataState.success(loginResponse.token!);
+      return DataState.success(response.token!);
     } catch (error) {
       return DataState.failure(DioException(
         requestOptions: RequestOptions(path: ''),
@@ -39,13 +29,11 @@ class AuthenticationRepositoryImplementation
   @override
   Future<DataState<String>> register(String username, String password) async {
     try {
-      // Create Register data
       final registerData = AuthSendData(username: username, password: password);
 
       // Send login request
       final response = await apiAuthentcation.register(registerData);
 
-      // Parse the response
       final registerResponse = loginresponceFromJson(response.token!);
 
       // Check if the token is null and handle it
