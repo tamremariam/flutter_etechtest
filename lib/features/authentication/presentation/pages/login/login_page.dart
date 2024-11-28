@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
           if (state is LoginSuccessfulState) {
             SnackBarUtils.showSnackBar(context, message: state.token);
             ProgressDialogUtils.hideProgressDialog();
-            context.go("/home");
+            context.go("/landing");
           }
         },
         child: Center(
@@ -107,10 +107,10 @@ class LoginPage extends StatelessWidget {
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: !isPasswordVisible,
                         onChanged: (text) {},
-                        validator: (value) => isValidPassword(value,
-                                isRequired: true)
-                            ? null
-                            : AppLocalizations.of(context)!.enterValidPassword,
+                        // validator: (value) => isValidPassword(value,
+                        //         isRequired: true)
+                        //     ? null
+                        //     : AppLocalizations.of(context)!.enterValidPassword,
                         suffixIcon: isPasswordVisible
                             ? Icons.visibility
                             : Icons.visibility_off_outlined,
@@ -145,7 +145,7 @@ class LoginPage extends StatelessWidget {
                     if (formKey.currentState?.validate() ?? false) {
                       context.read<LoginBloc>().add(
                           LoninSendUserNameAndPasswordEvent(
-                              "eve.holt@reqres.in", "cityslicka"));
+                              emailController.text, passwordController.text));
                     }
                   },
                   borderRadius: 40,

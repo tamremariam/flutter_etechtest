@@ -45,7 +45,7 @@ class _SignupPageState extends State<SignupPage> {
           if (state is SignupSuccessfulState) {
             SnackBarUtils.showSnackBar(context, message: state.token);
             ProgressDialogUtils.hideProgressDialog();
-            context.go("/home");
+            context.go("/landing");
           }
         },
         child: Center(
