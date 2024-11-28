@@ -4,10 +4,10 @@ part 'auth_send_data.g.dart';
 
 @JsonSerializable()
 class AuthSendData {
-  final String username;
+  final String email;
   final String password;
 
-  AuthSendData({required this.username, required this.password});
+  AuthSendData({required this.email, required this.password});
 
   factory AuthSendData.fromJson(Map<String, dynamic> json) =>
       _$AuthSendDataFromJson(json);

@@ -12,13 +12,14 @@ class AuthenticationRepositoryImplementation
   @override
   Future<DataState<String>> login(String username, String password) async {
     try {
-      final loginData = AuthSendData(username: username, password: password);
-
+      final loginData = AuthSendData(email: username, password: password);
       // Send login request
       final response = await apiAuthentcation.login(loginData);
+      print(response.toString());
 
       return DataState.success(response.token!);
     } catch (error) {
+      print(error.toString());
       return DataState.failure(DioException(
         requestOptions: RequestOptions(path: ''),
         error: "An error occurred: $error",
@@ -29,7 +30,7 @@ class AuthenticationRepositoryImplementation
   @override
   Future<DataState<String>> register(String username, String password) async {
     try {
-      final registerData = AuthSendData(username: username, password: password);
+      final registerData = AuthSendData(email: username, password: password);
 
       // Send login request
       final response = await apiAuthentcation.register(registerData);
