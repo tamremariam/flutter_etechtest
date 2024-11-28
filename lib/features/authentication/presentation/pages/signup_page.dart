@@ -1,5 +1,4 @@
 import 'package:etechtest/core/themes/themes.dart';
-import 'package:etechtest/core/uitils/image_constant.dart';
 import 'package:etechtest/core/uitils/validation_functions.dart';
 import 'package:etechtest/features/wigets/custom_elevated_button.dart';
 import 'package:etechtest/features/wigets/custom_text_field.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -85,7 +85,7 @@ class _SignupPageState extends State<SignupPage> {
                     borderRadius: 40,
                     borderColor: AppThemes.outlineColor,
                     borderWidth: 2,
-                    contentPadding: EdgeInsets.only(left: 28.w),
+                    contentPadding: EdgeInsets.only(left: 28.w, top: 50),
                     controller: passwordController,
                     hintText: AppLocalizations.of(context)!.password,
                     keyboardType: TextInputType.visiblePassword,
@@ -105,68 +105,84 @@ class _SignupPageState extends State<SignupPage> {
                 );
               },
             ),
-            SizedBox(height: 24.h),
-            ValueListenableBuilder<bool>(
-              valueListenable: ispasswordAllist6caratters,
-              builder: (context, isChecked, child) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Transform.scale(
-                      scale: 1.3, // Adjust this value to control the size
-                      child: Checkbox(
-                        shape: const CircleBorder(),
-                        value: isChecked,
-                        onChanged: (newValue) {
-                          ispasswordAllist6caratters.value = newValue!;
-                        },
-                        activeColor: const Color.fromARGB(45, 31, 204, 120),
-                        checkColor: AppThemes.primaryColor,
-                      ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                children: [
+                  SizedBox(height: 24.h),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      AppLocalizations.of(context)!.passwordRequirements,
+                      size: TextSize.bodyLarge,
                     ),
-                    CustomText(
-                      AppLocalizations.of(context)!
-                          .passwordRequirementMinLength,
-                      size: TextSize.bodyMedium,
-                      textAlign: TextAlign.center,
-                      color: ispasswordAllist6caratters.value
-                          ? AppThemes.mainTextColor
-                          : null,
-                    ),
-                  ],
-                );
-              },
-            ),
-            ValueListenableBuilder<bool>(
-              valueListenable: ispasswordContainaNumber,
-              builder: (context, isChecked, child) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Transform.scale(
-                      scale: 1.3, // Adjust this value to control the size
-                      child: Checkbox(
-                        shape: const CircleBorder(),
-                        value: isChecked,
-                        onChanged: (newValue) {
-                          ispasswordContainaNumber.value = newValue!;
-                        },
-                        activeColor: const Color.fromARGB(45, 31, 204, 120),
-                        checkColor: AppThemes.primaryColor,
-                      ),
-                    ),
-                    CustomText(
-                      AppLocalizations.of(context)!
-                          .passwordRequirementContainsNumber,
-                      size: TextSize.bodyMedium,
-                      textAlign: TextAlign.center,
-                      color: ispasswordContainaNumber.value
-                          ? AppThemes.mainTextColor
-                          : null,
-                    ),
-                  ],
-                );
-              },
+                  ),
+                  ValueListenableBuilder<bool>(
+                    valueListenable: ispasswordAllist6caratters,
+                    builder: (context, isChecked, child) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Transform.scale(
+                            scale: 1.3, // Adjust this value to control the size
+                            child: Checkbox(
+                              shape: const CircleBorder(),
+                              value: isChecked,
+                              onChanged: (newValue) {
+                                ispasswordAllist6caratters.value = newValue!;
+                              },
+                              activeColor:
+                                  const Color.fromARGB(45, 31, 204, 120),
+                              checkColor: AppThemes.primaryColor,
+                            ),
+                          ),
+                          CustomText(
+                            AppLocalizations.of(context)!
+                                .passwordRequirementMinLength,
+                            size: TextSize.bodyMedium,
+                            textAlign: TextAlign.center,
+                            color: ispasswordAllist6caratters.value
+                                ? AppThemes.mainTextColor
+                                : null,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  ValueListenableBuilder<bool>(
+                    valueListenable: ispasswordContainaNumber,
+                    builder: (context, isChecked, child) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Transform.scale(
+                            scale: 1.3, // Adjust this value to control the size
+                            child: Checkbox(
+                              shape: const CircleBorder(),
+                              value: isChecked,
+                              onChanged: (newValue) {
+                                ispasswordContainaNumber.value = newValue!;
+                              },
+                              activeColor:
+                                  const Color.fromARGB(45, 31, 204, 120),
+                              checkColor: AppThemes.primaryColor,
+                            ),
+                          ),
+                          CustomText(
+                            AppLocalizations.of(context)!
+                                .passwordRequirementContainsNumber,
+                            size: TextSize.bodyMedium,
+                            textAlign: TextAlign.center,
+                            color: ispasswordContainaNumber.value
+                                ? AppThemes.mainTextColor
+                                : null,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: 72.h),
             CustomElevatedButton(
@@ -191,6 +207,7 @@ class _SignupPageState extends State<SignupPage> {
                   width: 5.w,
                 ),
                 InkWell(
+                  onTap: () => context.push("/login"),
                   child: CustomText(
                     AppLocalizations.of(context)!.login,
                     size: TextSize.headlineSmall,
@@ -229,7 +246,7 @@ class _SignupPageState extends State<SignupPage> {
             borderRadius: 40,
             borderColor: AppThemes.outlineColor,
             borderWidth: 2,
-            contentPadding: EdgeInsets.only(left: 28.w),
+            contentPadding: EdgeInsets.only(left: 28.w, top: 50),
             controller: controller,
             hintText: inputhint,
             keyboardType: keyboardType,
