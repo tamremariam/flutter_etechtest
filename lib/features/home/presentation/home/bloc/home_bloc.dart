@@ -12,12 +12,39 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeloadresourcesEvent>((event, emit) async {
       emit(HomeRecorceLoadingState());
       try {
-        print("111111111111111");
         final result = await homeUsecase.homeRepository.getListResource(1);
 
-        emit(HomeRecourceLoadedState(1, result.data!));
+        emit(HomeRecourceLoadedState(2, result.data!, false));
       } catch (error) {
-        // emit(HomeResourceErrorState(error.toString()));
+        emit(HomeFailedState());
+      }
+    });
+    on<HomeloadMoreresourcesEvent>((event, emit) async {
+      if (state is HomeRecourceLoadedState) {
+        final currentState = state as HomeRecourceLoadedState;
+
+        if (!currentState.lastpage) {
+          try {
+            int page = currentState.page;
+
+            final result =
+                await homeUsecase.homeRepository.getListResource(page);
+
+            if (result.data!.isEmpty) {
+              emit(HomeRecourceLoadedState(
+                  currentState.page + 1,
+                  List.from(currentState.resources)..addAll(result.data!),
+                  true));
+            } else {
+              emit(HomeRecourceLoadedState(
+                  currentState.page + 1,
+                  List.from(currentState.resources)..addAll(result.data!),
+                  false));
+            }
+          } catch (error) {
+            emit(HomeFailedState());
+          }
+        }
       }
     });
   }

@@ -14,6 +14,10 @@ class _LandingPageState extends State<LandingPage> {
   int selectedIndex = 0;
   final List<Widget> tabs = [
     const HomePage(),
+    const HomePage(),
+    const HomePage(),
+    const HomePage(),
+    const HomePage(),
   ];
 
   @override

@@ -26,8 +26,6 @@ class HomeRepositoryImplementation implements HomeRepository {
 
       return DataState.success(list);
     } catch (error) {
-      print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-      print(error.toString());
       return DataState.failure(DioException(
         requestOptions: RequestOptions(path: ''),
         error: "An error occurred: $error",

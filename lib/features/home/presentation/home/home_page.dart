@@ -1,13 +1,14 @@
-import 'package:etechtest/features/home/presentation/home/bloc/home_bloc.dart';
+import 'package:etechtest/core/uitils/image_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:etechtest/core/themes/themes.dart';
 import 'package:etechtest/features/home/presentation/home/Widget/category_filter_widget.dart';
 import 'package:etechtest/features/home/presentation/home/Widget/item_card_widget.dart';
+import 'package:etechtest/features/home/presentation/home/Widget/left_tab_widget.dart';
+import 'package:etechtest/features/home/presentation/home/bloc/home_bloc.dart';
 import 'package:etechtest/features/wigets/custom_text_field.dart';
 import 'package:etechtest/shared/widgets/custom_text.dart';
 
@@ -112,6 +113,9 @@ class _HomePageState extends State<HomePage>
             child: TabBarView(
               controller: tabController,
               children: [
+                const LeftTabWidget(),
+
+                // const Center(child: Text("Right Tab Content")),
                 GridView.builder(
                   padding: const EdgeInsets.all(16.0),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -124,15 +128,17 @@ class _HomePageState extends State<HomePage>
                   itemBuilder: (context, index) {
                     return ItemCard(
                       imageUrl: index % 2 == 0
-                          ? "https://via.placeholder.com/150"
-                          : "https://via.placeholder.com/150",
+                          ? ImageConstant.imagePlaceholder
+                          : ImageConstant.imageSalad,
                       title: index % 2 == 0 ? "Pancake" : "Salad",
                       author: index % 2 == 0 ? "Calum Lewis" : "Elif Sonas",
-                      time: ">60 mins",
+                      authorimageUrl: index % 2 == 0
+                          ? ImageConstant.imageauthor2
+                          : ImageConstant.imageauthor1,
+                      time: ">60",
                     );
                   },
                 ),
-                const Center(child: Text("Right Tab Content")),
               ],
             ),
           ),
