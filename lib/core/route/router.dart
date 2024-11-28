@@ -3,7 +3,8 @@ import 'package:etechtest/features/authentication/presentation/pages/password_re
 import 'package:etechtest/features/authentication/presentation/pages/reset_password_page.dart';
 import 'package:etechtest/features/authentication/presentation/pages/signup_page.dart';
 import 'package:etechtest/features/authentication/presentation/pages/verification_code_page.dart';
-import 'package:etechtest/features/home/presentation/home/home_page.dart';
+import 'package:etechtest/features/home/presentation/landing_page.dart';
+import 'package:etechtest/features/home/presentation/search/searchscreen_page.dart';
 import 'package:etechtest/features/onboarding/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +16,7 @@ class AppRouter {
       builder: (BuildContext context, GoRouterState state) {
         return
             // DistancePriferencePage();
-            const ResetPasswordPage();
+            const SearchscreenPage();
         // const SplashScreen();
       },
       routes: <RouteBase>[
@@ -38,9 +39,9 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: 'home',
+          path: 'landing',
           builder: (BuildContext context, GoRouterState state) {
-            return const HomePage();
+            return const LandingPage();
           },
         ),
         GoRoute(
@@ -59,6 +60,12 @@ class AppRouter {
           path: 'resetpassword',
           builder: (BuildContext context, GoRouterState state) {
             return const ResetPasswordPage();
+          },
+        ),
+        GoRoute(
+          path: 'search',
+          builder: (BuildContext context, GoRouterState state) {
+            return const SearchscreenPage();
           },
         ),
       ],
