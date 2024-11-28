@@ -1,6 +1,8 @@
 import 'package:etechtest/core/dependency_injection/dependency_injection.dart';
 import 'package:etechtest/core/route/router.dart';
 import 'package:etechtest/features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:etechtest/features/authentication/presentation/pages/login/bloc/login_bloc.dart';
+import 'package:etechtest/features/authentication/presentation/pages/signup/bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,34 +35,49 @@ class MyApp extends StatelessWidget {
             create: (context) => sl<AuthenticationBloc>(),
           ),
         ],
-        child: MediaQuery(
-          //this line is used to make use font is similar for all devices
-          //this line must be removed after development
-          data: MediaQuery.of(context).copyWith(
-            textScaler: TextScaler.linear(MediaQuery.of(context)
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<AuthenticationBloc>(
+              create: (context) => sl<AuthenticationBloc>(),
+            ),
+            BlocProvider<LoginBloc>(
+              create: (context) => sl<LoginBloc>(),
+            ),
+            BlocProvider<SignupBloc>(
+              create: (context) => sl<SignupBloc>(),
+            ),
+          ],
+          child: Builder(builder: (context) {
+            return MediaQuery(
+              //this line is used to make use font is similar for all devices
+              //this line must be removed after development
+              data: MediaQuery.of(context).copyWith(
+                textScaler: TextScaler.linear(MediaQuery.of(context)
 
-                // ignore: deprecated_member_use
-                .textScaleFactor
-                .clamp(1, 1.2)),
-          ),
-          child: MaterialApp.router(
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en'),
-              ],
-              locale: const Locale('en'),
-              title: 'Etech test',
-              // theme: AppThemes.lightTheme,
-              // darkTheme: AppThemes.darkTheme,
-              // themeMode: ThemeMode.system,
-              themeMode: ThemeMode.light,
-              debugShowCheckedModeBanner: false,
-              routerConfig: AppRouter.router),
+                    // ignore: deprecated_member_use
+                    .textScaleFactor
+                    .clamp(1, 1.2)),
+              ),
+              child: MaterialApp.router(
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: const [
+                    Locale('en'),
+                  ],
+                  locale: const Locale('en'),
+                  title: 'Etech test',
+                  // theme: AppThemes.lightTheme,
+                  // darkTheme: AppThemes.darkTheme,
+                  // themeMode: ThemeMode.system,
+                  themeMode: ThemeMode.light,
+                  debugShowCheckedModeBanner: false,
+                  routerConfig: AppRouter.router),
+            );
+          }),
         ),
       ),
       // )

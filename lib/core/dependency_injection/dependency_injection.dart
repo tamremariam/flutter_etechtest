@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:etechtest/core/network/network_constant.dart';
 import 'package:etechtest/features/authentication/domain/usecase/authentication_usecase.dart';
 import 'package:etechtest/features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:etechtest/features/authentication/presentation/pages/login/bloc/login_bloc.dart';
+import 'package:etechtest/features/authentication/presentation/pages/signup/bloc/signup_bloc.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/authentication/data/repository/authentication_repository_implimentaton.dart';
 import '../../features/authentication/data/service/api_authentcation.dart';
@@ -15,4 +17,6 @@ Future<void> authenticationDependencyInjection() async {
       AuthenticationRepositoryImplementation(sl()));
   sl.registerSingleton<AuthenticationUsecase>(AuthenticationUsecase(sl()));
   sl.registerCachedFactory(() => AuthenticationBloc(sl()));
+  sl.registerCachedFactory(() => LoginBloc(sl()));
+  sl.registerCachedFactory(() => SignupBloc(sl()));
 }

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:etechtest/core/themes/themes.dart';
 import 'package:etechtest/core/uitils/timer_utils.dart';
-import 'package:etechtest/features/authentication/presentation/widgets/otp.dart';
+import 'package:etechtest/shared/widgets/otp.dart';
 import 'package:etechtest/features/wigets/custom_elevated_button.dart';
 import 'package:etechtest/shared/widgets/custom_text.dart';
 import 'package:go_router/go_router.dart';
