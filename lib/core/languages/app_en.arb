@@ -1,0 +1,26 @@
+{
+  "@@locale": "en",
+  "startCooking": "Start Cooking",
+  "joinCommunitycookBetterFood": "Let's join our community\nto cook better food!",
+  "getStarted": "Get Started",
+  "welcomeBack": "Welcome Back!",
+  "pleaseEnterYourAccount": "Please enter your account here!",
+  "emailOrPhoneNumber": "Email or phone number",
+  "password": "Password",
+  "forgotPassword": "Forgot password?",
+  "login": "Login",
+  "orContinueWith": "Or continue with",
+  "google": "Google",
+  "dontHaveAnyAccount": "Don't have any account?",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "signUp": "Sign up",
+  "passwordRequirements": "Your password must contain:",
+  "passwordRequirementMinLength": "Atleast 6 characters.",
+  "passwordRequirementContainsNumber": "contain a number.",
+  "checkYourEmail": "Check your email",
+  "weveSentTheCode": "We've sent the code to your email",
+  "codeExpiresIn": "Code expires in: {time}",
+  "sendAgain": "Send again"
+
+
+}

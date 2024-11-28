@@ -1,0 +1,47 @@
+import 'package:etechtest/features/authentication/presentation/pages/login_page.dart';
+import 'package:etechtest/features/authentication/presentation/pages/signup_page.dart';
+import 'package:etechtest/features/home/presentation/home/home_page.dart';
+import 'package:etechtest/features/onboarding/onboarding_page.dart';
+import 'package:etechtest/features/onboarding/splash_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class AppRouter {
+  static final GoRouter router = GoRouter(routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        return
+            // DistancePriferencePage();
+            const SignupPage();
+        // const SplashScreen();
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          path: 'onboarding',
+          builder: (BuildContext context, GoRouterState state) {
+            return const OnboardingScreen();
+          },
+        ),
+        GoRoute(
+          path: 'login',
+          builder: (BuildContext context, GoRouterState state) {
+            return const LoginPage();
+          },
+        ),
+        GoRoute(
+          path: 'signup',
+          builder: (BuildContext context, GoRouterState state) {
+            return const SignupPage();
+          },
+        ),
+        GoRoute(
+          path: 'home',
+          builder: (BuildContext context, GoRouterState state) {
+            return const HomePage();
+          },
+        ),
+      ],
+    ),
+  ]);
+}

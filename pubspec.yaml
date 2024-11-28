@@ -1,0 +1,44 @@
+name: etechtest
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  go_router: ^14.2.1
+  equatable: ^2.0.5
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  get_it: ^8.0.0
+  dio: ^5.7.0
+  retrofit: ^4.4.1
+  json_annotation: ^4.9.0
+  flutter_screenutil: ^5.9.3
+  cupertino_icons: ^1.0.8
+  flutter_localizations:
+    sdk: flutter
+  cached_network_image: ^3.4.1
+  google_fonts: ^6.2.1
+  iconify_flutter: ^0.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  retrofit_generator: ">=8.0.0 <10.0.0"
+  build_runner: ^2.4.12
+  json_serializable: ^6.8.0
+  flutter_lints: ^4.0.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/placeholder/
