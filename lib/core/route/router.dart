@@ -16,7 +16,7 @@ class AppRouter {
       builder: (BuildContext context, GoRouterState state) {
         return
             // DistancePriferencePage();
-            const LoginPage();
+            const LandingPage();
         // const SplashScreen();
       },
       routes: <RouteBase>[

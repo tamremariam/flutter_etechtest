@@ -1,1 +1,1 @@
-const String backEndEndPoint = "https://reqres.in//api";
+const String backEndEndPoint = "https://reqres.in/api";
