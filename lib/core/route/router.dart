@@ -1,8 +1,8 @@
-import 'package:etechtest/features/authentication/presentation/pages/login/login_page.dart';
-import 'package:etechtest/features/authentication/presentation/pages/forgot/password_recovery_page.dart';
-import 'package:etechtest/features/authentication/presentation/pages/forgot/reset_password_page.dart';
-import 'package:etechtest/features/authentication/presentation/pages/signup/signup_page.dart';
-import 'package:etechtest/features/authentication/presentation/pages/forgot/verification_code_page.dart';
+import 'package:etechtest/features/authentication/presentation/login/login_page.dart';
+import 'package:etechtest/features/authentication/presentation/forgot/password_recovery_page.dart';
+import 'package:etechtest/features/authentication/presentation/forgot/reset_password_page.dart';
+import 'package:etechtest/features/authentication/presentation/signup/signup_page.dart';
+import 'package:etechtest/features/authentication/presentation/forgot/verification_code_page.dart';
 import 'package:etechtest/features/home/presentation/landing_page.dart';
 import 'package:etechtest/features/home/presentation/search/searchscreen_page.dart';
 import 'package:etechtest/features/onboarding/onboarding_page.dart';

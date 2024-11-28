@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:etechtest/features/home/domain/entities/responce_entity.dart';
 import 'package:etechtest/features/home/domain/usecase/authentication_usecase.dart';
 
 part 'home_event.dart';
@@ -13,11 +14,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       try {
         print("111111111111111");
         final result = await homeUsecase.homeRepository.getListResource(1);
-        print(result.data.toString());
-        // Assuming you return data from the `loadResources` method
-        // emit(HomeResourceLoadedState(result));
+
+        emit(HomeRecourceLoadedState(1, result.data!));
       } catch (error) {
-        print(error.toString());
         // emit(HomeResourceErrorState(error.toString()));
       }
     });

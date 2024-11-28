@@ -1,7 +1,7 @@
 import 'package:etechtest/core/themes/themes.dart';
 import 'package:etechtest/core/uitils/image_constant.dart';
 import 'package:etechtest/core/uitils/validation_functions.dart';
-import 'package:etechtest/features/authentication/presentation/pages/login/bloc/login_bloc.dart';
+import 'package:etechtest/features/authentication/presentation/login/bloc/login_bloc.dart';
 import 'package:etechtest/features/wigets/custom_elevated_button.dart';
 import 'package:etechtest/features/wigets/custom_text_field.dart';
 import 'package:etechtest/features/wigets/progress_dialog_utils.dart';
