@@ -1,6 +1,7 @@
 import 'package:etechtest/core/themes/themes.dart';
+import 'package:etechtest/core/uitils/image_constant.dart';
 import 'package:etechtest/core/uitils/validation_functions.dart';
-import 'package:etechtest/features/authentication/presentation/pages/signup/bloc/signup_bloc.dart';
+import 'package:etechtest/features/authentication/presentation/login/bloc/login_bloc.dart';
 import 'package:etechtest/features/wigets/custom_elevated_button.dart';
 import 'package:etechtest/features/wigets/custom_text_field.dart';
 import 'package:etechtest/features/wigets/progress_dialog_utils.dart';
@@ -8,44 +9,36 @@ import 'package:etechtest/shared/widgets/custom_snack_bar_widget.dart';
 import 'package:etechtest/shared/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
-  @override
-  State<SignupPage> createState() => _SignupPageState();
-}
-
-class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     //i declar here because i use stateless widget it doesnot reload i cant looase my datas
     final ValueNotifier<bool> passwordVisibility = ValueNotifier<bool>(false);
-    final ValueNotifier<bool> ispasswordAllist6caratters =
-        ValueNotifier<bool>(false);
-    final ValueNotifier<bool> ispasswordContainaNumber =
-        ValueNotifier<bool>(false);
+
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     return Scaffold(
-      body: BlocListener<SignupBloc, SignupState>(
+      body: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
-          if (state is SignupDataSendinState) {
+          if (state is LoginDataSendinState) {
             ProgressDialogUtils.showProgressDialog(context: context);
           }
-          if (state is SignupFailedState) {
+          if (state is LoginFailedState) {
             SnackBarUtils.showSnackBar(context, message: state.message);
             ProgressDialogUtils.hideProgressDialog();
           }
-          if (state is SignupSuccessfulState) {
+          if (state is LoginSuccessfulState) {
             SnackBarUtils.showSnackBar(context, message: state.token);
             ProgressDialogUtils.hideProgressDialog();
-            context.go("/home");
+            context.go("/landing");
           }
         },
         child: Center(
@@ -54,7 +47,7 @@ class _SignupPageState extends State<SignupPage> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 31.h,
+                  height: 107.h,
                 ),
                 CustomText(
                   AppLocalizations.of(context)!.welcomeBack,
@@ -108,16 +101,16 @@ class _SignupPageState extends State<SignupPage> {
                         borderRadius: 40,
                         borderColor: AppThemes.outlineColor,
                         borderWidth: 2,
-                        contentPadding: EdgeInsets.only(left: 28.w, top: 50),
+                        contentPadding: EdgeInsets.only(left: 28.w, top: 50.h),
                         controller: passwordController,
-                        hintText: AppLocalizations.of(context)!.password,
+                        hintText: AppLocalizations.of(context)!.enterPassword,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: !isPasswordVisible,
                         onChanged: (text) {},
-                        validator: (value) =>
-                            isValidPassword(value, isRequired: true)
-                                ? null
-                                : AppLocalizations.of(context)!.password,
+                        // validator: (value) => isValidPassword(value,
+                        //         isRequired: true)
+                        //     ? null
+                        //     : AppLocalizations.of(context)!.enterValidPassword,
                         suffixIcon: isPasswordVisible
                             ? Icons.visibility
                             : Icons.visibility_off_outlined,
@@ -128,98 +121,50 @@ class _SignupPageState extends State<SignupPage> {
                     );
                   },
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 24.h),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: CustomText(
-                          AppLocalizations.of(context)!.passwordRequirements,
-                          size: TextSize.bodyLarge,
-                        ),
+                SizedBox(height: 24.h),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 35.h),
+                    child: InkWell(
+                      onTap: () {
+                        context.push("/passwordrecovery");
+                      },
+                      child: CustomText(
+                        AppLocalizations.of(context)!.forgotPassword,
+                        size: TextSize.headlineSmall,
+                        // color: Appcolor,
                       ),
-                      ValueListenableBuilder<bool>(
-                        valueListenable: ispasswordAllist6caratters,
-                        builder: (context, isChecked, child) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Transform.scale(
-                                scale:
-                                    1.3, // Adjust this value to control the size
-                                child: Checkbox(
-                                  shape: const CircleBorder(),
-                                  value: isChecked,
-                                  onChanged: (newValue) {
-                                    ispasswordAllist6caratters.value =
-                                        newValue!;
-                                  },
-                                  activeColor:
-                                      const Color.fromARGB(45, 31, 204, 120),
-                                  checkColor: AppThemes.primaryColor,
-                                ),
-                              ),
-                              CustomText(
-                                AppLocalizations.of(context)!
-                                    .passwordRequirementMinLength,
-                                size: TextSize.bodyMedium,
-                                textAlign: TextAlign.center,
-                                color: ispasswordAllist6caratters.value
-                                    ? AppThemes.mainTextColor
-                                    : null,
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                      ValueListenableBuilder<bool>(
-                        valueListenable: ispasswordContainaNumber,
-                        builder: (context, isChecked, child) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Transform.scale(
-                                scale:
-                                    1.3, // Adjust this value to control the size
-                                child: Checkbox(
-                                  shape: const CircleBorder(),
-                                  value: isChecked,
-                                  onChanged: (newValue) {
-                                    ispasswordContainaNumber.value = newValue!;
-                                  },
-                                  activeColor:
-                                      const Color.fromARGB(45, 31, 204, 120),
-                                  checkColor: AppThemes.primaryColor,
-                                ),
-                              ),
-                              CustomText(
-                                AppLocalizations.of(context)!
-                                    .passwordRequirementContainsNumber,
-                                size: TextSize.bodyMedium,
-                                textAlign: TextAlign.center,
-                                color: ispasswordContainaNumber.value
-                                    ? AppThemes.mainTextColor
-                                    : null,
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 72.h),
                 CustomElevatedButton(
-                  text: AppLocalizations.of(context)!.signUp,
+                  text: AppLocalizations.of(context)!.login,
                   onPressed: () {
                     if (formKey.currentState?.validate() ?? false) {
-                      context.read<SignupBloc>().add(
-                          SignupSendUserNameAndPasswordEvent(
+                      context.read<LoginBloc>().add(
+                          LoninSendUserNameAndPasswordEvent(
                               emailController.text, passwordController.text));
                     }
                   },
+                  borderRadius: 40,
+                  width: 320.w,
+                  height: 50.h,
+                ),
+                SizedBox(height: 24.h),
+                CustomText(
+                  AppLocalizations.of(context)!.orContinueWith,
+                  size: TextSize.bodyMedium,
+                ),
+                SizedBox(height: 24.h),
+                CustomElevatedButton(
+                  prefixIcon: ImageConstant.googleIcon,
+                  text: AppLocalizations.of(context)!.google,
+                  onPressed: () {
+                    // context.push("/login");
+                  },
+                  color: AppThemes.secondaryColor,
                   borderRadius: 40,
                   width: 320.w,
                   height: 50.h,
@@ -229,7 +174,7 @@ class _SignupPageState extends State<SignupPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
-                      AppLocalizations.of(context)!.alreadyHaveAnAccount,
+                      AppLocalizations.of(context)!.dontHaveAnyAccount,
                       size: TextSize.headlineSmall,
                       // color: Appcolor,
                     ),
@@ -237,9 +182,9 @@ class _SignupPageState extends State<SignupPage> {
                       width: 5.w,
                     ),
                     InkWell(
-                      onTap: () => context.push("/login"),
+                      onTap: () => context.push("/signup"),
                       child: CustomText(
-                        AppLocalizations.of(context)!.login,
+                        AppLocalizations.of(context)!.signUp,
                         size: TextSize.headlineSmall,
                         color: AppThemes.primaryColor,
                       ),
