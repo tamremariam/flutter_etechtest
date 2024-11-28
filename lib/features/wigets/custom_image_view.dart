@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:etechtest/core/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -105,9 +104,10 @@ class CustomImageView extends StatelessWidget {
             placeholder: (context, url) => SizedBox(
               height: 30.h,
               width: 30.w,
-              child: Center(
-                child: CircularProgressIndicator(
-                  color: AppThemes.primaryColor,
+              child: Expanded(
+                child: LinearProgressIndicator(
+                  // color: AppThemes.primaryColor,
+                  color: Colors.grey.shade300,
                   backgroundColor: Colors.grey.shade100,
                 ),
               ),

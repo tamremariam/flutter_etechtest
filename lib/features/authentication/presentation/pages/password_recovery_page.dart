@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:etechtest/core/themes/themes.dart';
 import 'package:etechtest/core/uitils/validation_functions.dart';
 import 'package:etechtest/features/wigets/custom_elevated_button.dart';
 import 'package:etechtest/features/wigets/custom_text_field.dart';
 import 'package:etechtest/shared/widgets/custom_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class PasswordRecoveryPage extends StatelessWidget {
   const PasswordRecoveryPage({super.key});

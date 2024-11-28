@@ -36,6 +36,7 @@
   "resetPassword": "Reset your password",
   "pleaseEnterNewPassword": "Please enter your new password.",
   "done": "Done",
+  "cancelbutton":"Cancel",
   "search": "Search",
   "category": "Category",
   "left": "Left",
