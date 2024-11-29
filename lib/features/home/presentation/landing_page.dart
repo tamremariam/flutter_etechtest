@@ -1,3 +1,5 @@
+import 'package:etechtest/features/home/presentation/qr_code_scanner/qr_code_scanner_page.dart';
+import 'package:etechtest/features/home/presentation/search/searchscreen_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,8 +16,8 @@ class _LandingPageState extends State<LandingPage> {
   int selectedIndex = 0;
   final List<Widget> tabs = [
     const HomePage(),
-    const HomePage(),
-    const HomePage(),
+    const SearchscreenPage(),
+    const QrCodeScannerPage(),
     const HomePage(),
     const HomePage(),
   ];
