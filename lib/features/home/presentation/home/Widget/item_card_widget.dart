@@ -24,56 +24,103 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: CustomImageView(
-                imagePath: authorimageUrl,
-                width: 31.w,
-                height: 31.h,
+    return Flexible(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: CustomImageView(
+                  imagePath: authorimageUrl,
+                  width: 31.w,
+                  height: 31.h,
+                ),
               ),
+              SizedBox(width: 5.w),
+              CustomText(
+                author,
+                size: TextSize.bodyMedium,
+                color: AppThemes.mainTextColor,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 8.h,
+          ),
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: CustomImageView(
+                  imagePath: imageUrl,
+                  height: 120,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const Positioned(
+                top: 10.0,
+                right: 10.0,
+                child: Heart(),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: CustomText(
+              title,
+              size: TextSize.bodyLarge,
             ),
-            SizedBox(width: 5.w),
-            CustomText(
-              author,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: CustomText(
+              AppLocalizations.of(context)!.foodDuration(time),
               size: TextSize.bodyMedium,
-              color: AppThemes.mainTextColor,
             ),
-          ],
-        ),
-        SizedBox(
-          height: 10.h,
-        ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: CustomImageView(
-            imagePath: imageUrl,
-            height: 120,
-            width: double.infinity,
-            fit: BoxFit.cover,
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class Heart extends StatefulWidget {
+  const Heart({
+    super.key,
+  });
+
+  @override
+  State<Heart> createState() => _HeartState();
+}
+
+class _HeartState extends State<Heart> {
+  bool isFavorite = false;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isFavorite = !isFavorite;
+        });
+      },
+      child: Container(
+        width: 40.w,
+        height: 40.w,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(142, 0, 0, 0),
+          borderRadius: BorderRadius.circular(15.w), // Circular corners
         ),
-        SizedBox(
-          height: 10.h,
+        child: Icon(
+          isFavorite ? Icons.favorite : Icons.favorite_border,
+          color: isFavorite ? Colors.red : Colors.white,
+          size: 24.0,
         ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: CustomText(
-            title,
-            size: TextSize.bodyLarge,
-          ),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: CustomText(
-            AppLocalizations.of(context)!.foodDuration(time),
-            size: TextSize.bodyMedium,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
