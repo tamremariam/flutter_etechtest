@@ -11,6 +11,7 @@ import 'package:etechtest/features/home/presentation/home/Widget/left_tab_widget
 import 'package:etechtest/features/home/presentation/home/bloc/home_bloc.dart';
 import 'package:etechtest/features/wigets/custom_text_field.dart';
 import 'package:etechtest/shared/widgets/custom_text.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -61,11 +62,7 @@ class _HomePageState extends State<HomePage>
               controller: TextEditingController(),
               hintText: AppLocalizations.of(context)!.search,
               onChanged: (text) {},
-              onTap: () =>
-                  context.read<HomeBloc>().add(HomeloadresourcesEvent()),
-              // context.push("/search"),
-              // suffixIcon: Icons.visibility,
-              suffixIconOntap: () {},
+              onTap: () => context.push("/search"),
             ),
           ),
           SizedBox(

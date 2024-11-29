@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:etechtest/core/themes/themes.dart';
 import 'package:etechtest/features/home/presentation/home/Widget/category_filter_widget.dart';
 import 'package:etechtest/features/wigets/custom_elevated_button.dart';
 import 'package:etechtest/features/wigets/custom_text_field.dart';
 import 'package:etechtest/shared/widgets/custom_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 
 class SearchscreenPage extends StatefulWidget {
   const SearchscreenPage({super.key});
@@ -16,7 +17,7 @@ class SearchscreenPage extends StatefulWidget {
 }
 
 class _SearchscreenPageState extends State<SearchscreenPage> {
-  final TextEditingController searchController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +48,14 @@ class _SearchscreenPageState extends State<SearchscreenPage> {
                     controller: searchController,
                     hintText: AppLocalizations.of(context)!.search,
                     onChanged: (text) {},
-                    suffixIcon: Icons.cancel,
+                    suffixIcon: searchController.text.isEmpty ||
+                            searchController.text == ""
+                        ? null
+                        : Icons.cancel,
                     suffixIconColor: AppThemes.mainTextColor,
-                    suffixIconOntap: () {},
+                    suffixIconOntap: () {
+                      searchController.text = "";
+                    },
                   ),
                 ),
                 IconButton(
@@ -136,29 +142,36 @@ class _SearchscreenPageState extends State<SearchscreenPage> {
   Widget serchhistory(String title) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Row(
-            children: [
-              const Icon(
-                Icons.history_outlined,
-                color: AppThemes.mainTextColor,
-              ),
-              SizedBox(
-                width: 10.w,
-              ),
-              CustomText(
-                title,
-                size: TextSize.bodyLarge,
-              ),
-            ],
-          ),
-          const Icon(
-            Icons.north_west_outlined,
-            color: AppThemes.mainTextColor,
-          ),
-        ],
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            searchController.text = title;
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: [
+                const Icon(
+                  Icons.history_outlined,
+                  color: AppThemes.mainTextColor,
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                CustomText(
+                  title,
+                  size: TextSize.bodyLarge,
+                ),
+              ],
+            ),
+            const Icon(
+              Icons.north_west_outlined,
+              color: AppThemes.mainTextColor,
+            ),
+          ],
+        ),
       ),
     );
   }
